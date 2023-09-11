@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promises</title>
+  </head>
+  <body>
+    <div>
+      <h1 id="title1" style="visibility: hidden">Heading One</h1>
+      <h1 id="title2" style="visibility: hidden">Heading Two</h1>
+      <h1 id="title3" style="visibility: hidden">Heading Three</h1>
+      <h1 id="title4" style="visibility: hidden">Heading Four</h1>
+    </div>
+    <script>
+      // Using Then Only If You Return A Promise
+      // Calling Then When The Resolve Function Is Called
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          title1.style.visibility = "visible";
+          resolve();
+        }, 1000);
+      })
+        .then(() => {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              title2.style.visibility = "visible";
+              resolve();
+            }, 1000);
+          });
+        })
+        .then(() => {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              title3.style.visibility = "visible";
+              resolve();
+            }, 1000);
+          });
+        })
+        .then(() => {
+          setTimeout(() => {
+            title4.style.visibility = "visible";
+          }, 1000);
+        });
+    </script>
+  </body>
+</html>

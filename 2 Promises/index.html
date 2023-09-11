@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promises</title>
+  </head>
+  <body>
+    <script>
+      // Promise Creation
+      let p = new Promise((resolve, reject) => {
+        const isSuccess = true;
+
+        if (isSuccess) {
+          console.log("Success"); // 1
+          resolve("Resolve Succeed");
+        } else {
+          console.log("Failed");
+          reject("Resolve Failed");
+        }
+      });
+
+      console.log("After Promise Creatin, Before Promise Calling"); // 2
+
+      // Promise Calling (Async)
+      p.then((msg) => {
+        console.log("Calling Then"); // 4
+        console.log(msg); // Resolve Succeed // 5
+      }).catch((error) => {
+        console.log("Calling Catch - Error");
+        console.log(error); // Resolve Failed
+      });
+
+      console.log("After Promes Calling"); // 3
+    </script>
+  </body>
+</html>
