@@ -1,0 +1,70 @@
+const btn = document.querySelector(".titels > div");
+const titelsDiv = document.querySelector(".titels");
+const contentDiv = document.querySelector(".content");
+
+getUsers()
+  .then(() => {
+    getPosts(1);
+  })
+  .catch((err) => {
+    titelsDiv.innerHTML = `<div class="error">${err.message}</div>`;
+  });
+
+function getUsers() {
+  titelsDiv.innerHTML = '<div class="loading">Loading...</div>';
+  return new Promise((resolve, reject) => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((res) => {
+        showUsers(res.data);
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+function getPosts(id) {
+  contentDiv.innerHTML = '<div class="loading">Loading...</div>';
+  axios
+    .get(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
+    .then((res) => showPosts(res.data))
+    .catch(
+      (err) =>
+        (contentDiv.innerHTML = `<div class="error">${err.message}</div>`)
+    );
+}
+
+function showUsers(users) {
+  titelsDiv.innerHTML = "";
+  for (let user of users) {
+    titelsDiv.innerHTML += `
+      <div onClick="handelClick(this, ${user.id})">
+        <h3>${user.name}</h3>
+        <p>${user.email}</p>
+      </div>
+    `;
+  }
+  titelsDiv.firstElementChild.classList.add("active");
+}
+
+function showPosts(posts) {
+  contentDiv.innerHTML = "";
+  for (let post of posts) {
+    contentDiv.innerHTML += `
+    <div>
+      <h3>${post.title}</h3>
+      <p>${post.body}</p>
+    </div>
+  `;
+  }
+}
+
+function handelClick(el, userId) {
+  document.querySelectorAll(".titels > div.active").forEach((div) => {
+    div.classList.remove("active");
+  });
+  el.classList.add("active");
+  getPosts(userId);
+}
