@@ -16,7 +16,7 @@ function getUsers() {
     showUsers(request.response);
   };
   request.onerror = () => {
-    titelsDiv.innerHTML = '<div class="error">Sorry! Their Is An Error"</div>';
+    titelsDiv.innerHTML = '<div class="error">Sorry! Their Is An Error</div>';
   };
 }
 

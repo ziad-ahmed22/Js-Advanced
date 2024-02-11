@@ -14,10 +14,11 @@
     </div>
     <script>
       async function showTitels() {
-        await new Promise((resolve) => {
+        await new Promise((resolve, reject) => {
           setTimeout(() => {
             title1.style.visibility = "visible";
             resolve();
+            // reject();
           }, 1000);
         });
 

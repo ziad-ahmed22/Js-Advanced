@@ -314,10 +314,10 @@ function showPost(postData) {
 function postDetails(post) {
   const author = post.author;
   const comments = post.comments;
-  if (comments.length) {
-    showComments(comments);
-  }
-  console.log(comments);
+  // if (comments.length) {
+  //   showComments(comments);
+  // }
+  // console.log(comments);
   return `
   <div class="post">
   <div class="card border-0">
@@ -379,7 +379,7 @@ function postDetails(post) {
       </div>
 
       <div class="Comments mt-3">
-        ${comments.length ? showComments(comments) : ""}
+        ${comments.length > 0 ? showComments(comments) : ""}
         </div>
       </div>
 
@@ -407,9 +407,8 @@ function postDetails(post) {
 }
 
 function showComments(comments) {
-  console.log(comments);
   for (let com of comments) {
-    showComment(com);
+    return showComment(com);
   }
 }
 

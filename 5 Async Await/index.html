@@ -33,8 +33,24 @@
       // });
 
       // ====================================
-      // Async Used Before A Function That Return A Promise
-      // YOU CAN SAY Await instead of Then
+      // // Async Used Before A Function That Return A Promise
+      // // YOU CAN SAY Await instead of Then
+      // async function getUsers() {
+      //   const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      //   const data = await res.json();
+      //   console.log("Users", data);
+      // }
+
+      // async function getPosts() {
+      //   await getUsers();
+      //   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+      //   const data = await res.json();
+      //   console.log("Posts", data);
+      // }
+
+      // getPosts();
+
+      // ====================================
       async function getUsers() {
         const res = await fetch("https://jsonplaceholder.typicode.com/users");
         const data = await res.json();
@@ -42,13 +58,14 @@
       }
 
       async function getPosts() {
-        await getUsers();
         const res = await fetch("https://jsonplaceholder.typicode.com/posts");
         const data = await res.json();
         console.log("Posts", data);
       }
 
-      getPosts();
+      getUsers().then(() => {
+        getPosts();
+      });
     </script>
   </body>
 </html>

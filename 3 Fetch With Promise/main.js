@@ -2,7 +2,8 @@ const btn = document.querySelector(".titels > div");
 const titelsDiv = document.querySelector(".titels");
 const contentDiv = document.querySelector(".content");
 
-getUsers().then(() => {
+getUsers().then((res) => {
+  console.log(res);
   getPosts(1);
 });
 
@@ -12,7 +13,7 @@ function getUsers() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
         if (res.ok) {
-          resolve();
+          resolve(res);
           return res.json();
         }
         if (res.status === 404) {
